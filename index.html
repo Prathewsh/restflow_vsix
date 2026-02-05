@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>RestFlow</title>
+  <link rel="stylesheet" href="app.css" />
+</head>
+
+<body>
+
+  <div class="app">
+    <div class="sidebar">
+      <div class="header">
+        <span class="logo">RestFlow</span>
+      </div>
+
+      <div class="section">
+        <h3>Collections</h3>
+        <div class="item active">Sample APIs</div>
+      </div>
+    </div>
+
+    <div class="main">
+      <!-- Request Builder -->
+      <div class="builder panel">
+        <div class="top">
+          <select id="method">
+            <option>GET</option>
+            <option>POST</option>
+            <option>PUT</option>
+            <option>DELETE</option>
+          </select>
+
+          <input id="url" class="url" placeholder="https://api.example.com" />
+          <button class="send primary" id="send">Send</button>
+        </div>
+
+        <div class="tabs">
+          <button id="tab-raw" class="active">Raw</button>
+          <button id="tab-form">Form Data</button>
+        </div>
+
+        <textarea id="raw-body" rows="6" placeholder="Raw JSON / Text Body"></textarea>
+
+        <div id="form-body" class="form" style="display:none">
+          <div id="form-fields"></div>
+          <button class="add" id="add-field">+ Add Field</button>
+        </div>
+      </div>
+
+      <!-- Response Viewer -->
+      <div class="response">
+        <div id="response-empty" class="empty">No response yet</div>
+
+        <div id="response-meta" class="meta" style="display:none">
+          <span id="status-pill" class="status"></span>
+        </div>
+
+        <pre id="response-body" class="body" style="display:none"></pre>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const vscode = acquireVsCodeApi();
+    window.alert = function (message) {
+      vscode.postMessage({
+        command: 'alert',
+        text: message
+      });
+    };
+  </script>
+  <script src="app.js"></script>
+</body>
+
+</html>
